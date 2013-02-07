@@ -103,5 +103,13 @@ class _documentSetSpec extends Specification {
       $(".error-list").attr("href") must be equalTo("/documentsets/1/error-list")
       $(".error-list").attr("data-target") must be equalTo("#error-list-modal")
     }
+    
+    "should have public checkbox for complete job" in new NormalDocumentSetContext {
+      $("form.document-set").length must be_>=(1)
+    }
+    
+    "should not have public check box for in progress job"  in new DocumentSetWithJobContext {
+      $("form.document-set").length must be equalTo(0)
+    }
   }
 }
