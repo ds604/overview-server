@@ -185,6 +185,8 @@ views.DocumentSet._documentSet.jobs_to_process=Waiting for {0} other jobs to com
 views.DocumentSet._documentSet.subtitle.query=Query: {0}
 views.DocumentSet._documentSet.subtitle.other=From uploaded file
 
+views.DocumentSet._publicForm.label=Public
+
 views.Node._form.h3=Edit node
 views.Node._form.labels.description=Description
 views.Node._form.close=Close without saving

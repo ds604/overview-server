@@ -41,5 +41,9 @@ class _publicFormSpec extends Specification {
     "have a checked checkbox for public document sets" in new PublicDocumentSetContext {
       $("form :checkbox").attr("checked") must be equalTo("true")
     }
+    
+    "have a label" in new PublicDocumentSetContext {
+      $("form label").text must be equalTo("views.DocumentSet._publicForm.label")
+    }
   }
 }

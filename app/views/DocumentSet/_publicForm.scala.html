@@ -4,8 +4,7 @@
  
   <form method="POST" class="document-set" action="@routes.DocumentSetController.update(documentSet.id)?X-HTTP-Method-Override=PUT">
     <input type="checkbox" id="public" name="public" value="true" @if(documentSet.isPublic) { checked="true" } />
-
-      <label for="public">Public</label>
+      <label for="public">@m("label")</label>
     <input type="hidden" name="public" value="false" />
   </form>    
   
