@@ -42,6 +42,11 @@ class _publicFormSpec extends Specification {
       $("form :checkbox").attr("checked") must be equalTo("true")
     }
     
+    "have a hidden input after checkbox" in new PrivateDocumentSetContext {
+      val hiddenInput = $("form input").get(1) 
+      hiddenInput.getAttribute("value") must be equalTo("false")
+    }
+    
     "have a label" in new PublicDocumentSetContext {
       $("form label").text must be equalTo("views.DocumentSet._publicForm.label")
     }
