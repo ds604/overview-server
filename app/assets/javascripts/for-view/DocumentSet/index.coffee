@@ -386,6 +386,20 @@ $ ->
 
   $('#error-list-modal').on('hidden', (() -> $(this).removeData('modal')))
 
+  $('ul.document-sets').on 'change click', 'form.document-set input[type=checkbox]', (e) -> 
+    $form = $(e.target)
+    $form.submit()
+
+  $('ul.document-sets').on 'submit', 'form.document-set', (e) ->
+    $form = $(e.currentTarget)
+    data = $form.serialize()
+    oldData = $form.data('last-data')
+    if data != oldData
+      $form.data('last-data', data)
+      console.log($form.attr('action'))
+      $.ajax({ method: 'PUT', url: $form.attr('action'), data: data })
+    e.preventDefault()
+
   make_toggle_link('#documentcloud-import .manual')
   make_toggle_link('#documentcloud-import .sample')
 
