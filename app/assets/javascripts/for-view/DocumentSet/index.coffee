@@ -381,11 +381,7 @@ make_csv_upload_form = (form_element) ->
   refresh_charset()
   refresh_from_csv_reader()
 
-$ ->
-  window.dcimport.import_project_with_login($('#documentcloud-import .with-login')[0])
-
-  $('#error-list-modal').on('hidden', (() -> $(this).removeData('modal')))
-
+make_public_checkbox = () ->
   $('ul.document-sets').on 'change click', 'form.document-set input[type=checkbox]', (e) -> 
     $form = $(e.target)
     $form.submit()
@@ -399,6 +395,14 @@ $ ->
       console.log($form.attr('action'))
       $.ajax({ method: 'PUT', url: $form.attr('action'), data: data })
     e.preventDefault()
+
+        
+$ ->
+  window.dcimport.import_project_with_login($('#documentcloud-import .with-login')[0])
+
+  $('#error-list-modal').on('hidden', (() -> $(this).removeData('modal')))
+  $('#public-document-sets-modal').on('hidden', (() -> $(this).removeData('modal')))
+  make_public_checkbox()
 
   make_toggle_link('#documentcloud-import .manual')
   make_toggle_link('#documentcloud-import .sample')
