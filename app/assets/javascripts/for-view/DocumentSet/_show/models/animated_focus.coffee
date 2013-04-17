@@ -87,25 +87,34 @@ define [ './observable' ], (observable) ->
     # The movement will be as slight as possible: a pan only if necessary (and
     # as little shift as necessary), and a zoom only if still necessary.
     fit_pan: (left, right) ->
-      current_left = @pan - @zoom * 0.5
-      current_right = @pan + @zoom * 0.5
-      return if left >= current_left && right <= current_right
+      #current_left = @pan - @zoom * 0.5
+      #current_right = @pan + @zoom * 0.5
+      #return if left >= current_left && right <= current_right
 
-      min_zoom = right - left
+      #min_zoom = right - left
 
-      new_zoom = @zoom
-      new_pan = @pan
+      #new_zoom = @zoom
+      #new_pan = @pan
 
-      if min_zoom > @zoom
-        new_zoom = min_zoom
-        new_pan = (left + right) * 0.5
-      else
-        if left < current_left
-          new_pan = left + new_zoom * 0.5
-        else if right > current_right
-          new_pan = right - new_zoom * 0.5
+      #if min_zoom > @zoom
+      #  new_zoom = min_zoom
+      #  new_pan = (left + right) * 0.5
+      #else
+      #  if left < current_left
+      #    new_pan = left + new_zoom * 0.5
+      #  else if right > current_right
+      #    new_pan = right - new_zoom * 0.5
+      #
+      #@set_zoom_and_pan(new_zoom, new_pan)
 
-      @set_zoom_and_pan(new_zoom, new_pan)
+      zoom = right - left
+      pan = (left + right) * 0.5
+      return if @_auto_zoom_target == zoom && @_auto_pan_target == pan
+      @_auto_zoom_target = zoom
+      @_auto_pan_target = pan
+      @animate_zoom(zoom)
+      @animate_pan(pan)
+
 
     # Calls fit_pan(), only if @auto_pan_zoom_enabled
     auto_fit_pan: (left, right) ->

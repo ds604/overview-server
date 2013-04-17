@@ -22,6 +22,8 @@ define [
     mousewheel_zoom_factor: 1.2,
   }
 
+  MIN_PAN_DISTANCE = 3 # px. if the user clicks and moves less than this, do not pan.
+
   HOVER_NODE_TEMPLATE = _.template("""
     <div class="inner">(<%- node.doclist.n.toLocaleString() %>) <%- node.description %></div>
   """)
@@ -462,12 +464,15 @@ define [
         @focus.block_auto_pan_zoom()
 
         start_x = e.pageX
+        dx_max = 0
         zoom = @focus.zoom
         start_pan = @focus.pan
         width = $(@canvas).width()
 
         update_from_event = (e) =>
           dx = e.pageX - start_x
+          dx_max = dx if dx > dx_max
+          return if dx_max < MIN_PAN_DISTANCE
           d_pan = (dx / width) * zoom
 
           this._notify('zoom-pan', { zoom: zoom, pan: start_pan - d_pan })
