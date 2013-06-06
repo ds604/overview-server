@@ -6,10 +6,11 @@ import play.api.libs.json.JsValue
 
 import controllers.auth.AuthorizedAction
 import controllers.auth.Authorities.userOwningDocumentSet
-import org.overviewproject.tree.orm.Node
+import org.overviewproject.tree.orm.{ DocumentSet, Node }
+
 import models.{ OverviewUser, SubTreeLoader }
-import models.orm.DocumentSet
 import models.orm.finders.{NodeFinder,SearchResultFinder}
+
 import models.orm.stores.NodeStore
 
 trait NodeController extends Controller {
