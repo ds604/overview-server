@@ -4,8 +4,8 @@ package views.json.Tree
 import helpers.TestTag
 import models.core._
 import org.specs2.mutable.Specification
-
 import play.api.libs.json.Json.toJson
+import org.overviewproject.tree.orm.SearchResult
 
 class showSpec extends Specification {
   
@@ -22,8 +22,9 @@ class showSpec extends Specification {
       
       val dummyDocuments = List[Document]()
       val dummyTags = List[TestTag]()
+      val dummySearchResult = List[SearchResult]()
       
-      val treeJson = show(nodes, dummyDocuments, dummyTags).toString
+      val treeJson = show(nodes, dummyDocuments, dummyTags, dummySearchResult).toString
       
       treeJson must /("nodes") */("id" -> 1)
       treeJson must /("nodes") */("id" -> 2)
@@ -38,8 +39,9 @@ class showSpec extends Specification {
     	Document(30l, "description", Some("title"), Some("documentCloudId"), Seq(), Seq(22l))
       )
       val dummyTags = List[TestTag]()
+      val dummySearchResult = List[SearchResult]()
       
-      val treeJson = show(dummyNodes, documents, dummyTags).toString
+      val treeJson = show(dummyNodes, documents, dummyTags, dummySearchResult).toString
       
       treeJson must /("documents") */("id" -> 10l)
       treeJson must /("documents") */("id" -> 20l)
@@ -53,7 +55,9 @@ class showSpec extends Specification {
         TestTag(5l, "tag1", None, DocumentIdList(Seq(), 0)),
         TestTag(15l, "tag2", None, DocumentIdList(Seq(), 0))
       )
-      val treeJson = show(dummyNodes, dummyDocuments, tags).toString
+      val dummySearchResult = List[SearchResult]()
+      
+      val treeJson = show(dummyNodes, dummyDocuments, tags, dummySearchResult).toString
       
       treeJson must /("tags") */("id" -> 5l)
       treeJson must /("tags") */("id" -> 15l)
