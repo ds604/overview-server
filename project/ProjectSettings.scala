@@ -120,4 +120,10 @@ trait ProjectSettings {
     elasticSearchDep,
     elasticSearchCloudAwsDep
   )
+
+  val runnerDependencies = Seq(
+    akkaTestkit % "test",
+    specs2Dep % "test",
+    mockitoDep % "test"
+  )
 }
